@@ -11,13 +11,25 @@
         header h1{margin:0;font-size:2.5em}
         header h1 a{color:#fff;text-decoration:none}
         header p{color:#ccc;margin:10px 0 0}
+        
+        /* Estilos del menú */
+        nav{background:#1a1a1a;padding:0}
+        .menu{list-style:none;margin:0;padding:0;display:flex;justify-content:center;flex-wrap:wrap}
+        .menu li{margin:0}
+        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none;font-weight:500;transition:background 0.3s}
+        .menu li a:hover{background:#ff6600;color:#fff}
+        .menu li a.activo{background:#ff6600;color:#fff}
+        
         footer{background:#f4f4f4;padding:20px 0;margin-top:40px;text-align:center;color:#666;font-size:0.9em}
         #main_content{background:#fff;padding:20px 0}
         .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;margin-top:10px}
         .btn:hover{background:#e05500}
         h1,h2,h3{color:#2d2d2d}
         a{color:#ff6600}
-        code{background:#f4f4f4;padding:2px 5px;border-radius:3px}
+        
+        /* Ocultar/Mostrar secciones */
+        .pagina{display:none}
+        .pagina.activa{display:block}
     </style>
 </head>
 <body>
@@ -28,19 +40,106 @@
         </div>
     </header>
 
-    <div class="container">
-        <section id="main_content">
-            <h2>Bienvenido a mi sitio</h2>
-            <p>AQUÍ PON TU FRASE ORIGINAL</p>
-            
-            <p>Este es mi sitio web creado con GitHub Pages.</p>
-        </section>
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a href="#" onclick="mostrarPagina('inicio'); return false" class="activo" id="link-inicio">Inicio</a></li>
+                <li><a href="#" onclick="mostrarPagina('sobre'); return false" id="link-sobre">Sobre mí</a></li>
+                <li><a href="#" onclick="mostrarPagina('proyectos'); return false" id="link-proyectos">Proyectos</a></li>
+                <li><a href="#" onclick="mostrarPagina('contacto'); return false" id="link-contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PÁGINA DE INICIO -->
+    <div id="inicio" class="pagina activa">
+        <div class="container">
+            <section id="main_content">
+                <h2>Bienvenido a mi sitio</h2>
+                <p>AQUÍ PON TU FRASE ORIGINAL</p>
+                <p>Este es mi sitio web creado con GitHub Pages usando el tema Architect.</p>
+                <button class="btn" onclick="alert('¡Gracias por visitar mi sitio!')">Haz clic aquí</button>
+            </section>
+        </div>
+    </div>
+
+    <!-- PÁGINA SOBRE MÍ -->
+    <div id="sobre" class="pagina">
+        <div class="container">
+            <section id="main_content">
+                <h2>Sobre mí</h2>
+                <p>Hola, soy el creador de este sitio web. Me gusta la tecnología y aprender cosas nuevas.</p>
+                <p>Este sitio está creado con GitHub Pages y el tema Architect.</p>
+                <p>Mis intereses incluyen:</p>
+                <ul>
+                    <li>Programación</li>
+                    <li>Diseño web</li>
+                    <li>Tecnología</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- PÁGINA PROYECTOS -->
+    <div id="proyectos" class="pagina">
+        <div class="container">
+            <section id="main_content">
+                <h2>Mis proyectos</h2>
+                <p>Estos son algunos de mis proyectos:</p>
+                <ul>
+                    <li><strong>Proyecto 1:</strong> Mi primera web en GitHub Pages</li>
+                    <li><strong>Proyecto 2:</strong> Sitio con menú de navegación</li>
+                    <li><strong>Proyecto 3:</strong> (Próximamente)</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- PÁGINA CONTACTO -->
+    <div id="contacto" class="pagina">
+        <div class="container">
+            <section id="main_content">
+                <h2>Contacto</h2>
+                <p>Puedes contactarme a través de:</p>
+                <ul>
+                    <li>Email: <a href="mailto:miemail@ejemplo.com">miemail@ejemplo.com</a></li>
+                    <li>GitHub: <a href="#">github.com/tuusuario</a></li>
+                </ul>
+                <p>¡Gracias por visitar mi sitio!</p>
+            </section>
+        </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>Creado con GitHub Pages</p>
+            <p>© 2025 - Mi sitio web con Architect | Creado con GitHub Pages</p>
         </div>
     </footer>
+
+    <script>
+        function mostrarPagina(paginaId) {
+            // Ocultar todas las páginas
+            var paginas = document.querySelectorAll('.pagina');
+            for(var i = 0; i < paginas.length; i++) {
+                paginas[i].classList.remove('activa');
+            }
+            
+            // Mostrar la página seleccionada
+            document.getElementById(paginaId).classList.add('activa');
+            
+            // Quitar la clase "activo" de todos los links del menú
+            var links = document.querySelectorAll('.menu li a');
+            for(var i = 0; i < links.length; i++) {
+                links[i].classList.remove('activo');
+            }
+            
+            // Añadir la clase "activo" al link clickeado
+            var linkActivo = document.getElementById('link-' + paginaId);
+            if(linkActivo) {
+                linkActivo.classList.add('activo');
+            }
+        }
+    </script>
 </body>
 </html>

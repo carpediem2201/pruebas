@@ -1,4 +1,0 @@
-yaml
-remote_theme: pages-themes/architect
-plugins:
-- jekyll-remote-theme

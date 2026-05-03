@@ -3,60 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tema Claro | Elegante</title>
+    <title>Tema Claro | Menú Hamburguesa</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fafafa;color:#2c3e50;line-height:1.6}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fafafa;color:#2c3e50;line-height:1.6;overflow-x:hidden}
         .container{max-width:900px;margin:0 auto;padding:20px}
-        header{background:#fff;padding:40px 0;border-bottom:2px solid #ecf0f1;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-        header h1{font-size:2.5rem;color:#2c3e50}
-        header p{color:#7f8c8d}
+        
+        header{background:#fff;padding:15px 0;border-bottom:2px solid #ecf0f1;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+        .header-container{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 20px}
+        .header-container h1{font-size:1.5rem;color:#2c3e50}
+        
+        .hamburger-btn{background:#3498db;border:none;color:#fff;font-size:1.8rem;cursor:pointer;padding:10px 15px;border-radius:8px;transition:background 0.3s;z-index:1001}
+        .hamburger-btn:hover{background:#2980b9}
+        
+        .sidebar-menu{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#2c3e50;color:#fff;transition:left 0.3s;z-index:1000;box-shadow:2px 0 10px rgba(0,0,0,0.2)}
+        .sidebar-menu.open{left:0}
+        .sidebar-header{padding:20px;border-bottom:1px solid #34495e}
+        .sidebar-header h3{color:#3498db}
+        .sidebar-header p{font-size:0.8rem;color:#bdc3c7;margin-top:5px}
+        .sidebar-links{list-style:none;padding:0;margin:0}
+        .sidebar-links li{border-bottom:1px solid #34495e}
+        .sidebar-links li a{display:block;padding:15px 20px;color:#ecf0f1;text-decoration:none;transition:all 0.3s}
+        .sidebar-links li a:hover{background:#3498db;color:#fff;padding-left:25px}
+        
+        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:0.3s;z-index:999}
+        .overlay.active{opacity:1;visibility:visible}
+        
         nav{background:#fff;border-bottom:1px solid #ecf0f1}
         .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{
-            display:block;
-            padding:15px 25px;
-            color:#7f8c8d;
-            text-decoration:none;
-            cursor:pointer;
-            transition:all 0.3s;
-            border-radius:8px;
-            margin:5px;
-        }
-        /* Hover para TODOS los enlaces (incluye activo, pero será sobreescrito) */
-        .menu li a:hover{
-            color:#e74c3c;
-            background:#f0f0f0;
-        }
-        /* El enlace activo NO hace hover (permanece igual) */
-        .menu li a.activo:hover{
-            background:transparent;
-            color:#7f8c8d;
-            cursor:default;
-        }
+        .menu li a{display:block;padding:15px 25px;color:#7f8c8d;text-decoration:none;cursor:pointer;transition:color 0.3s}
+        .menu li a:hover{color:#e74c3c}
+        .menu li a.activo{color:#7f8c8d}
+        
         .card{background:#fff;padding:25px;border-radius:12px;margin:20px 0;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
         footer{background:#fff;padding:20px 0;text-align:center;margin-top:40px;color:#7f8c8d;border-top:1px solid #ecf0f1}
         .btn{display:inline-block;background:#3498db;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none}
         .btn:hover{background:#2980b9}
         .pagina{display:none}
         .pagina.activa{display:block}
-        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}}
+        
+        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}.header-container h1{font-size:1.2rem}}
     </style>
 </head>
 <body>
-    <header><div class="container"><h1>☀️ Tema Claro</h1><p>Elegante y minimalista</p></div></header>
-    <nav><div class="container"><ul class="menu">
-        <li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li>
-        <li><a data-pagina="sobre">📖 Sobre</a></li>
-        <li><a data-pagina="contacto">📧 Contacto</a></li>
-    </ul></div></nav>
+
+    <header>
+        <div class="header-container">
+            <button class="hamburger-btn" id="hamburgerBtn">☰</button>
+            <h1>☀️ Tema Claro</h1>
+            <div style="width:50px;"></div>
+        </div>
+    </header>
+
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h3>📁 Menú Principal</h3>
+            <p>Selecciona una opción</p>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html">🎨 Selector de Temas</a></li>
+            <li><a href="paginas/pagina1.html">📍 Opción 1</a></li>
+            <li><a href="paginas/pagina2.html">📍 Opción 2</a></li>
+            <li><a href="paginas/pagina3.html">📍 Opción 3</a></li>
+            <li><a href="paginas/pagina4.html">📍 Opción 4</a></li>
+            <li><a href="paginas/pagina5.html">📍 Opción 5</a></li>
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li>
+                <li><a data-pagina="sobre">📖 Sobre</a></li>
+                <li><a data-pagina="contacto">📧 Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <div id="inicio" class="pagina activa">
         <div class="container">
             <div class="card">
                 <h2>Diseño Claro</h2>
-                <p>Fondo blanco, sombras suaves y detalles en rojo. Ideal para sitios profesionales.</p>
-                <p><strong>Comportamiento del menú:</strong> La opción activa (donde estás) no tiene hover. Las otras opciones se resaltan al pasar el ratón.</p>
+                <p>Fondo blanco, sombras suaves y detalles en azul. Ideal para sitios profesionales.</p>
                 <a href="index.html" class="btn">← Volver al selector</a>
             </div>
         </div>
@@ -82,34 +112,49 @@
         </div>
     </div>
 
-    <footer><div class="container"><p>© 2025 - Tema Claro | <a href="index.html" style="color:#e74c3c">Volver al selector</a></p></div></footer>
+    <footer>
+        <div class="container">
+            <p>© 2025 - Tema Claro | <a href="index.html" style="color:#3498db">Volver al selector</a></p>
+        </div>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const enlaces = document.querySelectorAll('.menu li a');
-            
-            function cambiarPagina(event) {
-                event.preventDefault();
-                const paginaId = this.getAttribute('data-pagina');
-                const paginaActiva = document.getElementById(paginaId);
-                
-                // Cambiar página activa
-                document.querySelectorAll('.pagina').forEach(function(pagina) {
-                    pagina.classList.remove('activa');
-                });
-                paginaActiva.classList.add('activa');
-                
-                // Cambiar clase activo en el menú
-                enlaces.forEach(function(enlace) {
-                    enlace.classList.remove('activo');
-                });
-                this.classList.add('activo');
-            }
-            
-            for (let i = 0; i < enlaces.length; i++) {
-                enlaces[i].addEventListener('click', cambiarPagina);
-            }
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const overlay = document.getElementById('overlay');
+        
+        hamburgerBtn.addEventListener('click', () => {
+            sidebarMenu.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
+        
+        overlay.addEventListener('click', () => {
+            sidebarMenu.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.sidebar-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebarMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        const enlaces = document.querySelectorAll('.menu li a');
+        function cambiarPagina(event) {
+            event.preventDefault();
+            const paginaId = this.getAttribute('data-pagina');
+            document.querySelectorAll('.pagina').forEach(pagina => pagina.classList.remove('activa'));
+            document.getElementById(paginaId).classList.add('activa');
+            enlaces.forEach(enlace => enlace.classList.remove('activo'));
+            this.classList.add('activo');
+        }
+        for (let i = 0; i < enlaces.length; i++) {
+            enlaces[i].addEventListener('click', cambiarPagina);
+        }
     </script>
 </body>
 </html>

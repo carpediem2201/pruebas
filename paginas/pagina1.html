@@ -29,11 +29,9 @@
     </footer>
 
     <script>
-        // Obtener el tema desde la URL (parámetro o referrer)
         const urlParams = new URLSearchParams(window.location.search);
         let tema = urlParams.get('tema');
         
-        // Si no hay parámetro, intentar obtener del referrer
         if (!tema && document.referrer) {
             const referrer = document.referrer;
             if (referrer.includes('tema-clasico')) tema = 'clasico';
@@ -44,29 +42,20 @@
             else if (referrer.includes('tema-card')) tema = 'card';
         }
         
-        // Si no se detecta tema, usar clasico por defecto
         if (!tema) tema = 'clasico';
         
-        // Configurar el botón para volver al tema anterior
         const backButton = document.getElementById('backButton');
         backButton.href = `../tema-${tema}.html`;
         
-        // Cambiar color del botón según el tema (opcional)
         const btn = document.querySelector('.btn');
-        if (tema === 'oscuro') btn.style.background = '#ff6600';
-        else if (tema === 'claro') btn.style.background = '#3498db';
-        else if (tema === 'tech') btn.style.background = '#00ff88';
-        else if (tema === 'natural') btn.style.background = '#4caf50';
-        else if (tema === 'card') btn.style.background = '#e94560';
-        
-        // Cambiar color de fondo según el tema
         const body = document.body;
-        if (tema === 'clasico') body.style.background = '#2d2d2d';
-        else if (tema === 'oscuro') body.style.background = '#0a0a0a';
-        else if (tema === 'claro') body.style.background = '#fafafa';
-        else if (tema === 'tech') body.style.background = '#0d0d0d';
-        else if (tema === 'natural') body.style.background = '#e8f5e9';
-        else if (tema === 'card') body.style.background = '#f0f2f5';
+        
+        if (tema === 'clasico') { body.style.background = '#2d2d2d'; btn.style.background = '#ff6600'; }
+        else if (tema === 'oscuro') { body.style.background = '#0a0a0a'; btn.style.background = '#ff6600'; }
+        else if (tema === 'claro') { body.style.background = '#fafafa'; body.style.color = '#333'; btn.style.background = '#3498db'; }
+        else if (tema === 'tech') { body.style.background = '#0d0d0d'; btn.style.background = '#00ff88'; btn.style.color = '#000'; }
+        else if (tema === 'natural') { body.style.background = '#e8f5e9'; body.style.color = '#2e5c2e'; btn.style.background = '#4caf50'; }
+        else if (tema === 'card') { body.style.background = '#f0f2f5'; body.style.color = '#333'; btn.style.background = '#e94560'; }
     </script>
 </body>
 </html>

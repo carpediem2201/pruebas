@@ -48,34 +48,46 @@
     <footer><div class="container"><p>© 2025 - Tema Clásico | <a href="index.html">Volver al selector</a></p></div></footer>
 
     <script>
+    // Función que se ejecuta cuando la página termina de cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        
         // Seleccionar todos los enlaces del menú
         const enlaces = document.querySelectorAll('.menu li a');
         
         // Función para cambiar de página
         function cambiarPagina(event) {
-            const paginaId = event.currentTarget.getAttribute('data-pagina');
+            // Evitar que el enlace recargue la página
+            event.preventDefault();
+            
+            // Obtener el ID de la página a mostrar
+            const paginaId = this.getAttribute('data-pagina');
             
             // Ocultar todas las páginas
-            document.querySelectorAll('.pagina').forEach(pagina => {
+            const todasLasPaginas = document.querySelectorAll('.pagina');
+            todasLasPaginas.forEach(function(pagina) {
                 pagina.classList.remove('activa');
             });
             
             // Mostrar la página seleccionada
-            document.getElementById(paginaId).classList.add('activa');
+            const paginaAMostrar = document.getElementById(paginaId);
+            if (paginaAMostrar) {
+                paginaAMostrar.classList.add('activa');
+            }
             
-            // Quitar clase activo de todos los enlaces
-            enlaces.forEach(enlace => {
+            // Quitar la clase 'activo' de TODOS los enlaces del menú
+            enlaces.forEach(function(enlace) {
                 enlace.classList.remove('activo');
             });
             
-            // Añadir clase activo al enlace pulsado
-            event.currentTarget.classList.add('activo');
+            // Añadir la clase 'activo' SOLO al enlace que se clickeó
+            this.classList.add('activo');
         }
         
-        // Añadir evento click a cada enlace
-        enlaces.forEach(enlace => {
-            enlace.addEventListener('click', cambiarPagina);
-        });
-    </script>
+        // Asignar el evento click a cada enlace del menú
+        for (let i = 0; i < enlaces.length; i++) {
+            enlaces[i].addEventListener('click', cambiarPagina);
+        }
+    });
+</script>
 </body>
 </html>

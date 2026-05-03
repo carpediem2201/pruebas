@@ -1,161 +1,215 @@
 <!DOCTYPE html>
 <html lang="es">
-    <!-- Actualización forzosa: 2025-05-03 14:30 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tema Clásico | Menú Hamburguesa</title>
+    <title>Selector de Temas | GitHub Pages</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#333;overflow-x:hidden}
-        .container{max-width:900px;margin:0 auto;padding:20px}
-        
-        header{background:#2d2d2d;color:#fff;padding:15px 0;border-bottom:4px solid #ff6600}
-        .header-container{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 20px}
-        .header-container h1{font-size:1.5rem}
-        
-        .hamburger-btn{background:#ff6600;border:none;color:#fff;font-size:1.8rem;cursor:pointer;padding:10px 15px;border-radius:8px;transition:background 0.3s;z-index:1001}
-        .hamburger-btn:hover{background:#e05500}
-        
-        .sidebar-menu{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#1a1a1a;color:#fff;transition:left 0.3s;z-index:1000;box-shadow:2px 0 10px rgba(0,0,0,0.3)}
-        .sidebar-menu.open{left:0}
-        .sidebar-header{padding:20px;border-bottom:1px solid #333;background:#2d2d2d}
-        .sidebar-header h3{color:#ff6600}
-        .sidebar-header p{font-size:0.8rem;color:#ccc;margin-top:5px}
-        .sidebar-links{list-style:none;padding:0;margin:0}
-        .sidebar-links li{border-bottom:1px solid #333}
-        .sidebar-links li a{display:block;padding:15px 20px;color:#ccc;text-decoration:none;transition:all 0.3s}
-        .sidebar-links li a:hover{background:#ff6600;color:#fff;padding-left:25px}
-        
-        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:0.3s;z-index:999}
-        .overlay.active{opacity:1;visibility:visible}
-        
-        nav{background:#1a1a1a;padding:0}
-        .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none;cursor:pointer;transition:background 0.3s}
-        .menu li a:hover{background:#ff6600}
-        .menu li a.activo{background:transparent}
-        
-        footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
-        .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
-        .btn:hover{background:#e05500}
-        .pagina{display:none}
-        .pagina.activa{display:block}
-        
-        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}.header-container h1{font-size:1.2rem}}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .selector-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .selector-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: block;
+        }
+
+        .temas-select {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .temas-select:hover {
+            border-color: #667eea;
+        }
+
+        .temas-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+        }
+
+        .btn-ver {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-ver:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+        }
+
+        .btn-ver:active {
+            transform: translateY(0);
+        }
+
+        .info-temas {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .info-temas h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .lista-temas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .lista-temas span {
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.5rem; }
+            .header p { font-size: 0.85rem; }
+            .content { padding: 25px 20px; }
+        }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-container">
-            <button class="hamburger-btn" id="hamburgerBtn">☰</button>
-            <h1>Tema Clásico</h1>
-            <div style="width:50px;"></div>
+    <div class="selector-container">
+        <div class="header">
+            <h1>🎨 Galería de Temas</h1>
+            <p>Selecciona un diseño para tu sitio web</p>
         </div>
-    </header>
 
-    <div class="sidebar-menu" id="sidebarMenu">
-        <div class="sidebar-header">
-            <h3>📁 Menú Principal</h3>
-            <p>Selecciona una opción</p>
+        <div class="content">
+            <label class="selector-label">📱 Elige un tema:</label>
+            <select id="selectorTemas" class="temas-select">
+                <option value="">-- Selecciona un tema --</option>
+                <option value="tema-clasico.html">🏛️ Tema Clásico (Architect)</option>
+                <option value="tema-oscuro.html">🌙 Tema Oscuro Minimalista</option>
+                <option value="tema-claro.html">☀️ Tema Claro Elegante</option>
+                <option value="tema-tech.html">💻 Tema Tecnológico (Neon)</option>
+                <option value="tema-natural.html">🌿 Tema Natural (Verde)</option>
+                <option value="tema-card.html">🃏 Tema Tarjetas (Cards)</option>
+            </select>
+
+            <button id="btnVerTema" class="btn-ver">🚀 Ver tema seleccionado</button>
+
+            <div class="info-temas">
+                <h3>📁 Temas disponibles:</h3>
+                <div class="lista-temas">
+                    <span>🏛️ Clásico</span>
+                    <span>🌙 Oscuro</span>
+                    <span>☀️ Claro</span>
+                    <span>💻 Tech Neon</span>
+                    <span>🌿 Natural</span>
+                    <span>🃏 Cards</span>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">
+                    💡 Cada tema es un archivo HTML independiente. Al seleccionar uno, serás redirigido a ese archivo.
+                </p>
+            </div>
         </div>
-        <ul class="sidebar-links">
-            <li><a href="paginas/pagina1.html">📍 Opción 1</a></li>
-            <li><a href="paginas/pagina2.html">📍 Opción 2</a></li>
-            <li><a href="paginas/pagina3.html">📍 Opción 3</a></li>
-            <li><a href="paginas/pagina4.html">📍 Opción 4</a></li>
-            <li><a href="paginas/pagina5.html">📍 Opción 5</a></li>
-        </ul>
+
+        <footer>
+            <p>✨ Selecciona un tema y pruébalo | Todos los temas son responsivos</p>
+        </footer>
     </div>
-
-    <div class="overlay" id="overlay"></div>
-
-    <nav>
-        <div class="container">
-            <ul class="menu">
-                <li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li>
-                <li><a data-pagina="sobre">📖 Sobre</a></li>
-                <li><a data-pagina="contacto">📧 Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div id="inicio" class="pagina activa">
-        <div class="container">
-            <h2>Bienvenido</h2>
-            <p>Este es el tema clásico tipo Architect.</p>
-            <p><strong>📱 Prueba el botón ☰ en la esquina superior izquierda.</strong> Se desplegará un menú lateral con 5 opciones.</p>
-            <a href="index.html" class="btn">← Volver al selector</a>
-        </div>
-    </div>
-
-    <div id="sobre" class="pagina">
-        <div class="container">
-            <h2>Sobre mí</h2>
-            <p>Información sobre el autor de este sitio.</p>
-            <a href="index.html" class="btn">← Volver al selector</a>
-        </div>
-    </div>
-
-    <div id="contacto" class="pagina">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p>Email: ejemplo@midominio.com</p>
-            <a href="index.html" class="btn">← Volver al selector</a>
-        </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>© 2025 - Tema Clásico | <a href="index.html">Volver al selector</a></p>
-        </div>
-    </footer>
 
     <script>
-        // Menú hamburguesa
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const sidebarMenu = document.getElementById('sidebarMenu');
-        const overlay = document.getElementById('overlay');
-        
-        if (hamburgerBtn) {
-            hamburgerBtn.addEventListener('click', () => {
-                sidebarMenu.classList.add('open');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        
-        if (overlay) {
-            overlay.addEventListener('click', () => {
-                sidebarMenu.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.sidebar-links li a').forEach(link => {
-            link.addEventListener('click', () => {
-                sidebarMenu.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Menú superior (Inicio, Sobre, Contacto)
-        document.addEventListener('DOMContentLoaded', function() {
-            const enlaces = document.querySelectorAll('.menu li a');
-            function cambiarPagina(event) {
-                event.preventDefault();
-                const paginaId = this.getAttribute('data-pagina');
-                document.querySelectorAll('.pagina').forEach(pagina => pagina.classList.remove('activa'));
-                document.getElementById(paginaId).classList.add('activa');
-                enlaces.forEach(enlace => enlace.classList.remove('activo'));
-                this.classList.add('activo');
+        const select = document.getElementById('selectorTemas');
+        const btn = document.getElementById('btnVerTema');
+
+        btn.addEventListener('click', function() {
+            const temaSeleccionado = select.value;
+            if (temaSeleccionado) {
+                window.location.href = temaSeleccionado;
+            } else {
+                alert('⚠️ Por favor, selecciona un tema de la lista.');
             }
-            for (let i = 0; i < enlaces.length; i++) {
-                enlaces[i].addEventListener('click', cambiarPagina);
+        });
+
+        select.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                btn.click();
             }
         });
     </script>

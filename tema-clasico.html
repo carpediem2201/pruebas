@@ -2,148 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Tema Clásico | Architect con Menú Hamburguesa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema Clásico | Menú Hamburguesa</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#333;overflow-x:hidden}
         .container{max-width:900px;margin:0 auto;padding:20px}
         
-        /* ========== CABECERA CON BOTÓN HAMBURGUESA ========== */
-        header{
-            background:#2d2d2d;
-            color:#fff;
-            padding:15px 0;
-            border-bottom:4px solid #ff6600;
-            position:relative;
-        }
-        .header-container{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            max-width:900px;
-            margin:0 auto;
-            padding:0 20px;
-        }
-        .header-container h1{
-            font-size:1.5rem;
-            margin:0;
-        }
-        .header-container p{
-            display:none;
-        }
+        header{background:#2d2d2d;color:#fff;padding:15px 0;border-bottom:4px solid #ff6600}
+        .header-container{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 20px}
+        .header-container h1{font-size:1.5rem}
         
-        /* Botón hamburguesa */
-        .hamburger-btn{
-            background:#ff6600;
-            border:none;
-            color:#fff;
-            font-size:1.8rem;
-            cursor:pointer;
-            padding:10px 15px;
-            border-radius:8px;
-            transition:background 0.3s;
-            z-index:1001;
-            position:relative;
-        }
-        .hamburger-btn:hover{
-            background:#e05500;
-        }
+        .hamburger-btn{background:#ff6600;border:none;color:#fff;font-size:1.8rem;cursor:pointer;padding:10px 15px;border-radius:8px;transition:background 0.3s;z-index:1001}
+        .hamburger-btn:hover{background:#e05500}
         
-        /* Menú lateral (off-canvas) */
-        .sidebar-menu{
-            position:fixed;
-            top:0;
-            left:-280px;
-            width:280px;
-            height:100%;
-            background:#1a1a1a;
-            color:#fff;
-            transition:left 0.3s ease;
-            z-index:1000;
-            box-shadow:2px 0 10px rgba(0,0,0,0.3);
-            overflow-y:auto;
-        }
-        .sidebar-menu.open{
-            left:0;
-        }
+        .sidebar-menu{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#1a1a1a;color:#fff;transition:left 0.3s;z-index:1000;box-shadow:2px 0 10px rgba(0,0,0,0.3)}
+        .sidebar-menu.open{left:0}
+        .sidebar-header{padding:20px;border-bottom:1px solid #333;background:#2d2d2d}
+        .sidebar-header h3{color:#ff6600}
+        .sidebar-header p{font-size:0.8rem;color:#ccc;margin-top:5px}
+        .sidebar-links{list-style:none;padding:0;margin:0}
+        .sidebar-links li{border-bottom:1px solid #333}
+        .sidebar-links li a{display:block;padding:15px 20px;color:#ccc;text-decoration:none;transition:all 0.3s}
+        .sidebar-links li a:hover{background:#ff6600;color:#fff;padding-left:25px}
         
-        /* Cabecera del menú lateral */
-        .sidebar-header{
-            padding:20px;
-            border-bottom:1px solid #333;
-            background:#2d2d2d;
-        }
-        .sidebar-header h3{
-            margin:0;
-            color:#ff6600;
-        }
-        .sidebar-header p{
-            font-size:0.8rem;
-            color:#ccc;
-            margin-top:5px;
-        }
+        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:0.3s;z-index:999}
+        .overlay.active{opacity:1;visibility:visible}
         
-        /* Opciones del menú lateral */
-        .sidebar-links{
-            list-style:none;
-            padding:0;
-            margin:0;
-        }
-        .sidebar-links li{
-            border-bottom:1px solid #333;
-        }
-        .sidebar-links li a{
-            display:flex;
-            align-items:center;
-            gap:12px;
-            padding:15px 20px;
-            color:#ccc;
-            text-decoration:none;
-            transition:all 0.3s;
-            font-size:1rem;
-        }
-        .sidebar-links li a:hover{
-            background:#ff6600;
-            color:#fff;
-            padding-left:25px;
-        }
-        
-        /* Overlay (fondo oscuro al abrir menú) */
-        .overlay{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.5);
-            opacity:0;
-            visibility:hidden;
-            transition:all 0.3s;
-            z-index:999;
-        }
-        .overlay.active{
-            opacity:1;
-            visibility:visible;
-        }
-        
-        /* Menú superior original */
         nav{background:#1a1a1a;padding:0}
         .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{
-            display:block;
-            padding:15px 25px;
-            color:#fff;
-            text-decoration:none;
-            cursor:pointer;
-            transition:background 0.3s;
-        }
-        .menu li a:hover{
-            background:#ff6600;
-        }
-        .menu li a.activo{
-            background:transparent;
-        }
+        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none;cursor:pointer;transition:background 0.3s}
+        .menu li a:hover{background:#ff6600}
+        .menu li a.activo{background:transparent}
         
         footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
         .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
@@ -151,45 +41,36 @@
         .pagina{display:none}
         .pagina.activa{display:block}
         
-        @media(max-width:768px){
-            .menu{flex-direction:column}
-            .menu li a{text-align:center}
-            .header-container h1{font-size:1.2rem}
-        }
+        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}.header-container h1{font-size:1.2rem}}
     </style>
 </head>
 <body>
 
-    <!-- CABECERA CON BOTÓN HAMBURGUESA -->
     <header>
         <div class="header-container">
             <button class="hamburger-btn" id="hamburgerBtn">☰</button>
             <h1>Tema Clásico</h1>
-            <div style="width:50px;"></div> <!-- Espaciador -->
+            <div style="width:50px;"></div>
         </div>
     </header>
 
-    <!-- MENÚ LATERAL (HAMBURGUESA) -->
     <div class="sidebar-menu" id="sidebarMenu">
         <div class="sidebar-header">
-            <h3>📁 Navegación</h3>
-            <p>Explora las secciones</p>
+            <h3>📁 Menú Principal</h3>
+            <p>Selecciona una opción</p>
         </div>
         <ul class="sidebar-links">
-            <li><a href="index.html">🏠 Inicio (Selector)</a></li>
-            <li><a href="tema-clasico.html">🎨 Tema Clásico</a></li>
-            <li><a href="tema-oscuro.html">🌙 Tema Oscuro</a></li>
-            <li><a href="tema-claro.html">☀️ Tema Claro</a></li>
-            <li><a href="tema-tech.html">💻 Tema Tech</a></li>
-            <li><a href="tema-natural.html">🌿 Tema Natural</a></li>
-            <li><a href="tema-card.html">🃏 Tema Cards</a></li>
+            <li><a href="index.html">🎨 Selector de Temas</a></li>
+            <li><a href="paginas/pagina1.html">📍 Opción 1</a></li>
+            <li><a href="paginas/pagina2.html">📍 Opción 2</a></li>
+            <li><a href="paginas/pagina3.html">📍 Opción 3</a></li>
+            <li><a href="paginas/pagina4.html">📍 Opción 4</a></li>
+            <li><a href="paginas/pagina5.html">📍 Opción 5</a></li>
         </ul>
     </div>
 
-    <!-- OVERLAY -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- MENÚ SUPERIOR ORIGINAL -->
     <nav>
         <div class="container">
             <ul class="menu">
@@ -200,12 +81,11 @@
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="inicio" class="pagina activa">
         <div class="container">
             <h2>Bienvenido</h2>
-            <p>Este es el tema clásico tipo Architect. Diseño elegante y profesional.</p>
-            <p><strong>📱 Prueba el botón ☰ en la esquina superior izquierda.</strong> Se desplegará un menú lateral con enlaces a todos los temas.</p>
+            <p>Este es el tema clásico tipo Architect.</p>
+            <p><strong>📱 Prueba el botón ☰ en la esquina superior izquierda.</strong> Se desplegará un menú lateral con enlaces al selector de temas y a 5 opciones.</p>
             <a href="index.html" class="btn">← Volver al selector</a>
         </div>
     </div>
@@ -213,7 +93,7 @@
     <div id="sobre" class="pagina">
         <div class="container">
             <h2>Sobre mí</h2>
-            <p>Información sobre el autor de este sitio. Apasionado por el diseño web y la tecnología.</p>
+            <p>Información sobre el autor de este sitio.</p>
             <a href="index.html" class="btn">← Volver al selector</a>
         </div>
     </div>
@@ -221,7 +101,7 @@
     <div id="contacto" class="pagina">
         <div class="container">
             <h2>Contacto</h2>
-            <p>Puedes contactarme a través de email: ejemplo@midominio.com</p>
+            <p>Email: ejemplo@midominio.com</p>
             <a href="index.html" class="btn">← Volver al selector</a>
         </div>
     </div>
@@ -233,49 +113,47 @@
     </footer>
 
     <script>
-        // ========== MENÚ HAMBURGUESA ==========
+        // Menú hamburguesa
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const sidebarMenu = document.getElementById('sidebarMenu');
         const overlay = document.getElementById('overlay');
         
-        function openMenu() {
-            sidebarMenu.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        if (hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                sidebarMenu.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
         }
         
-        function closeMenu() {
-            sidebarMenu.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebarMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         }
-        
-        hamburgerBtn.addEventListener('click', openMenu);
-        overlay.addEventListener('click', closeMenu);
         
         // Cerrar menú al hacer clic en un enlace
-        const sidebarLinks = document.querySelectorAll('.sidebar-links li a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
+        document.querySelectorAll('.sidebar-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebarMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
         
-        // ========== MENÚ SUPERIOR (Inicio, Sobre, Contacto) ==========
+        // Menú superior (Inicio, Sobre, Contacto)
         document.addEventListener('DOMContentLoaded', function() {
             const enlaces = document.querySelectorAll('.menu li a');
-            
             function cambiarPagina(event) {
                 event.preventDefault();
                 const paginaId = this.getAttribute('data-pagina');
-                document.querySelectorAll('.pagina').forEach(function(pagina) {
-                    pagina.classList.remove('activa');
-                });
+                document.querySelectorAll('.pagina').forEach(pagina => pagina.classList.remove('activa'));
                 document.getElementById(paginaId).classList.add('activa');
-                enlaces.forEach(function(enlace) {
-                    enlace.classList.remove('activo');
-                });
+                enlaces.forEach(enlace => enlace.classList.remove('activo'));
                 this.classList.add('activo');
             }
-            
             for (let i = 0; i < enlaces.length; i++) {
                 enlaces[i].addEventListener('click', cambiarPagina);
             }

@@ -3,125 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opción 2 | Mi Sitio</title>
+    <title>Opción 2</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#333}
-        .container{max-width:900px;margin:0 auto;padding:20px}
-        header{background:#2d2d2d;color:#fff;padding:15px 0;border-bottom:4px solid #ff6600}
-        .header-container{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 20px}
-        .header-container h1{font-size:1.5rem}
-        .hamburger-btn{background:#ff6600;border:none;color:#fff;font-size:1.8rem;cursor:pointer;padding:10px 15px;border-radius:8px;transition:background 0.3s}
-        .hamburger-btn:hover{background:#e05500}
-        .sidebar-menu{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#1a1a1a;color:#fff;transition:left 0.3s;z-index:1000;box-shadow:2px 0 10px rgba(0,0,0,0.3)}
-        .sidebar-menu.open{left:0}
-        .sidebar-header{padding:20px;border-bottom:1px solid #333;background:#2d2d2d}
-        .sidebar-header h3{color:#ff6600}
-        .sidebar-header p{font-size:0.8rem;color:#ccc;margin-top:5px}
-        .sidebar-links{list-style:none;padding:0;margin:0}
-        .sidebar-links li{border-bottom:1px solid #333}
-        .sidebar-links li a{display:block;padding:15px 20px;color:#ccc;text-decoration:none;transition:all 0.3s}
-        .sidebar-links li a:hover{background:#ff6600;color:#fff;padding-left:25px}
-        .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:0.3s;z-index:999}
-        .overlay.active{opacity:1;visibility:visible}
-        nav{background:#1a1a1a;padding:0}
-        .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none;cursor:pointer;transition:background 0.3s}
-        .menu li a:hover{background:#ff6600}
-        .contenido-principal{min-height:70vh;padding:40px 0}
-        footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
-        .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
-        .btn:hover{background:#e05500}
-        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}.header-container h1{font-size:1.2rem}}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#2d2d2d;color:#fff;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+        .container{max-width:600px;margin:0 auto;padding:40px 20px;text-align:center}
+        .card{background:rgba(255,255,255,0.1);border-radius:16px;padding:40px;backdrop-filter:blur(10px)}
+        h1{font-size:2rem;margin-bottom:20px}
+        p{font-size:1.2rem;margin-bottom:30px;opacity:0.9}
+        .btn{display:inline-block;background:#ff6600;color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:bold;transition:all 0.3s}
+        .btn:hover{background:#e05500;transform:translateY(-2px)}
+        footer{text-align:center;padding:20px;margin-top:auto;opacity:0.7}
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-container">
-            <button class="hamburger-btn" id="hamburgerBtn">☰</button>
+    <div class="container">
+        <div class="card">
             <h1>📍 Opción 2</h1>
-            <div style="width:50px;"></div>
-        </div>
-    </header>
-
-    <div class="sidebar-menu" id="sidebarMenu">
-        <div class="sidebar-header">
-            <h3>📁 Menú Principal</h3>
-            <p>Selecciona una opción</p>
-        </div>
-        <ul class="sidebar-links">
-            <li><a href="pagina1.html">📍 Opción 1</a></li>
-            <li><a href="pagina2.html">📍 Opción 2</a></li>
-            <li><a href="pagina3.html">📍 Opción 3</a></li>
-            <li><a href="pagina4.html">📍 Opción 4</a></li>
-            <li><a href="pagina5.html">📍 Opción 5</a></li>
-            <li><a href="../tema-clasico.html">← Volver al tema clásico</a></li>
-        </ul>
-    </div>
-
-    <div class="overlay" id="overlay"></div>
-
-    <nav>
-        <div class="container">
-            <ul class="menu">
-                <li><a href="../tema-clasico.html">🏠 Inicio</a></li>
-                <li><a href="../index.html">🎨 Selector de temas</a></li>
-                <li><a href="../tema-clasico.html#contacto">📧 Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="contenido-principal">
-        <div class="container">
-            <h2>📍 Opción 2</h2>
-            <p>Este es el contenido de la primera página.</p>
-            <p>Personaliza este texto con la información que quieras mostrar.</p>
-            <p>Puedes añadir imágenes, listas, o cualquier otro contenido HTML.</p>
-            <a href="../tema-clasico.html" class="btn">← Volver al tema clásico</a>
+            <p>Has seleccionado la Opción 2</p>
+            <a href="#" id="backButton" class="btn">← Volver al tema anterior</a>
         </div>
     </div>
-
     <footer>
-        <div class="container">
-            <p>© 2025 - Mi Sitio Web | <a href="../tema-clasico.html">Volver al inicio</a></p>
-        </div>
+        <p>© 2025 - Mi Sitio Web</p>
     </footer>
 
     <script>
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const sidebarMenu = document.getElementById('sidebarMenu');
-        const overlay = document.getElementById('overlay');
+        const urlParams = new URLSearchParams(window.location.search);
+        let tema = urlParams.get('tema');
         
-        hamburgerBtn.addEventListener('click', () => {
-            sidebarMenu.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+        if (!tema && document.referrer) {
+            const referrer = document.referrer;
+            if (referrer.includes('tema-clasico')) tema = 'clasico';
+            else if (referrer.includes('tema-oscuro')) tema = 'oscuro';
+            else if (referrer.includes('tema-claro')) tema = 'claro';
+            else if (referrer.includes('tema-tech')) tema = 'tech';
+            else if (referrer.includes('tema-natural')) tema = 'natural';
+            else if (referrer.includes('tema-card')) tema = 'card';
+        }
         
-        overlay.addEventListener('click', () => {
-            sidebarMenu.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+        if (!tema) tema = 'clasico';
         
-        document.querySelectorAll('.sidebar-links li a').forEach(link => {
-            link.addEventListener('click', () => {
-                sidebarMenu.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
+        const backButton = document.getElementById('backButton');
+        backButton.href = `../tema-${tema}.html`;
         
-        // Marcar enlace activo en el menú lateral
-        const currentPage = window.location.pathname.split('/').pop();
-        document.querySelectorAll('.sidebar-links li a').forEach(link => {
-            const linkPage = link.getAttribute('href');
-            if (linkPage === currentPage || linkPage === `./${currentPage}`) {
-                link.style.background = '#ff6600';
-                link.style.color = '#fff';
-            }
-        });
+        const btn = document.querySelector('.btn');
+        const body = document.body;
+        
+        if (tema === 'clasico') { body.style.background = '#2d2d2d'; btn.style.background = '#ff6600'; }
+        else if (tema === 'oscuro') { body.style.background = '#0a0a0a'; btn.style.background = '#ff6600'; }
+        else if (tema === 'claro') { body.style.background = '#fafafa'; body.style.color = '#333'; btn.style.background = '#3498db'; }
+        else if (tema === 'tech') { body.style.background = '#0d0d0d'; btn.style.background = '#00ff88'; btn.style.color = '#000'; }
+        else if (tema === 'natural') { body.style.background = '#e8f5e9'; body.style.color = '#2e5c2e'; btn.style.background = '#4caf50'; }
+        else if (tema === 'card') { body.style.background = '#f0f2f5'; body.style.color = '#333'; btn.style.background = '#e94560'; }
     </script>
 </body>
 </html>

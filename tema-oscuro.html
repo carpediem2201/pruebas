@@ -13,8 +13,22 @@
         header p{color:#888}
         nav{background:#111;padding:0;border-bottom:1px solid #222}
         .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{display:block;padding:15px 25px;color:#ccc;text-decoration:none;cursor:pointer}
-        .menu li a:hover,.menu li a.activo{color:#fff;background:#1a1a1a}
+        .menu li a{
+            display:block;
+            padding:15px 25px;
+            color:#ccc;
+            text-decoration:none;
+            cursor:pointer;
+            transition:all 0.3s;
+        }
+        .menu li a:hover{
+            color:#fff;
+            background:#1a1a1a;
+        }
+        .menu li a.activo{
+            background:transparent;
+            color:#ccc;
+        }
         .card{background:#111;padding:25px;border-radius:12px;margin:20px 0;border:1px solid #222}
         footer{background:#000;padding:20px 0;text-align:center;margin-top:40px;color:#666}
         .btn{display:inline-block;background:#333;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none}
@@ -26,24 +40,63 @@
 </head>
 <body>
     <header><div class="container"><h1>🌙 Tema Oscuro</h1><p>Minimalista y elegante</p></div></header>
-    <nav><div class="container"><ul class="menu"><li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li><li><a data-pagina="sobre">📖 Sobre</a></li><li><a data-pagina="contacto">📧 Contacto</a></li></ul></div></nav>
-    
-    <div id="inicio" class="pagina activa"><div class="container"><div class="card"><h2>Diseño Minimalista</h2><p>Perfecto para una experiencia visual nocturna. Fondo oscuro, texto suave y bordes sutiles.</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
-    <div id="sobre" class="pagina"><div class="container"><div class="card"><h2>Sobre este tema</h2><p>Tema oscuro diseñado para reducir la fatiga visual en entornos con poca luz.</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
-    <div id="contacto" class="pagina"><div class="container"><div class="card"><h2>Contacto</h2><p>Email: oscuro@midominio.com</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
-    
+    <nav><div class="container"><ul class="menu">
+        <li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li>
+        <li><a data-pagina="sobre">📖 Sobre</a></li>
+        <li><a data-pagina="contacto">📧 Contacto</a></li>
+    </ul></div></nav>
+
+    <div id="inicio" class="pagina activa">
+        <div class="container">
+            <div class="card">
+                <h2>Diseño Minimalista</h2>
+                <p>Perfecto para una experiencia visual nocturna. Fondo oscuro, texto suave y bordes sutiles.</p>
+                <a href="index.html" class="btn">← Volver al selector</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="sobre" class="pagina">
+        <div class="container">
+            <div class="card">
+                <h2>Sobre este tema</h2>
+                <p>Tema oscuro diseñado para reducir la fatiga visual en entornos con poca luz.</p>
+                <a href="index.html" class="btn">← Volver al selector</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contacto" class="pagina">
+        <div class="container">
+            <div class="card">
+                <h2>Contacto</h2>
+                <p>Email: oscuro@midominio.com</p>
+                <a href="index.html" class="btn">← Volver al selector</a>
+            </div>
+        </div>
+    </div>
+
     <footer><div class="container"><p>© 2025 - Tema Oscuro | <a href="index.html" style="color:#888">Volver al selector</a></p></div></footer>
 
     <script>
-        const enlaces = document.querySelectorAll('.menu li a');
-        function cambiarPagina(event) {
-            const paginaId = event.currentTarget.getAttribute('data-pagina');
-            document.querySelectorAll('.pagina').forEach(pagina => pagina.classList.remove('activa'));
-            document.getElementById(paginaId).classList.add('activa');
-            enlaces.forEach(enlace => enlace.classList.remove('activo'));
-            event.currentTarget.classList.add('activo');
-        }
-        enlaces.forEach(enlace => enlace.addEventListener('click', cambiarPagina));
+        document.addEventListener('DOMContentLoaded', function() {
+            const enlaces = document.querySelectorAll('.menu li a');
+            function cambiarPagina(event) {
+                event.preventDefault();
+                const paginaId = this.getAttribute('data-pagina');
+                document.querySelectorAll('.pagina').forEach(function(pagina) {
+                    pagina.classList.remove('activa');
+                });
+                document.getElementById(paginaId).classList.add('activa');
+                enlaces.forEach(function(enlace) {
+                    enlace.classList.remove('activo');
+                });
+                this.classList.add('activo');
+            }
+            for (let i = 0; i < enlaces.length; i++) {
+                enlaces[i].addEventListener('click', cambiarPagina);
+            }
+        });
     </script>
 </body>
 </html>

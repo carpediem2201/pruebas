@@ -13,19 +13,37 @@
         header p{color:#c8e6c9}
         nav{background:#1b3b1b}
         .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{display:block;padding:15px 25px;color:#c8e6c9;text-decoration:none}
+        .menu li a{display:block;padding:15px 25px;color:#c8e6c9;text-decoration:none;cursor:pointer}
         .menu li a:hover,.menu li a.activo{background:#4caf50;color:#fff}
         .card{background:#fff;padding:25px;border-radius:16px;margin:20px 0;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
         footer{background:#1b3b1b;padding:20px 0;text-align:center;margin-top:40px;color:#c8e6c9}
         .btn{display:inline-block;background:#4caf50;color:#fff;padding:10px 20px;border-radius:25px;text-decoration:none}
         .btn:hover{background:#2e5c2e}
+        .pagina{display:none}
+        .pagina.activa{display:block}
         @media(max-width:768px){.menu{flex-direction:column}}
     </style>
 </head>
 <body>
     <header><div class="container"><h1>🌿 Tema Natural</h1><p>Inspirado en la naturaleza</p></div></header>
-    <nav><div class="container"><ul class="menu"><li><a href="#" class="activo">Inicio</a></li><li><a href="#">Sobre</a></li><li><a href="#">Contacto</a></li></ul></div></nav>
-    <div class="container"><div class="card"><h2>Conexión con la naturaleza</h2><p>Verdes suaves, tipografía serif y diseño orgánico. Ideal para blogs de viajes, eco o lifestyle.</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
-    <footer><div class="container"><p>© 2025 - Tema Natural | <a href="index.html" style="color:#c8e6c9">Volver</a></p></div></footer>
+    <nav><div class="container"><ul class="menu"><li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li><li><a data-pagina="sobre">📖 Sobre</a></li><li><a data-pagina="contacto">📧 Contacto</a></li></ul></div></nav>
+    
+    <div id="inicio" class="pagina activa"><div class="container"><div class="card"><h2>Conexión con la naturaleza</h2><p>Verdes suaves, tipografía serif y diseño orgánico. Ideal para blogs de viajes, eco o lifestyle.</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
+    <div id="sobre" class="pagina"><div class="container"><div class="card"><h2>Sobre lo natural</h2><p>Un diseño que busca transmitir calma, frescura y conexión con el medio ambiente.</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
+    <div id="contacto" class="pagina"><div class="container"><div class="card"><h2>Contacto natural</h2><p>Email: natural@midominio.com</p><a href="index.html" class="btn">← Volver al selector</a></div></div></div>
+    
+    <footer><div class="container"><p>© 2025 - Tema Natural | <a href="index.html" style="color:#c8e6c9">Volver al selector</a></p></div></footer>
+
+    <script>
+        const enlaces = document.querySelectorAll('.menu li a');
+        function cambiarPagina(event) {
+            const paginaId = event.currentTarget.getAttribute('data-pagina');
+            document.querySelectorAll('.pagina').forEach(pagina => pagina.classList.remove('activa'));
+            document.getElementById(paginaId).classList.add('activa');
+            enlaces.forEach(enlace => enlace.classList.remove('activo'));
+            event.currentTarget.classList.add('activo');
+        }
+        enlaces.forEach(enlace => enlace.addEventListener('click', cambiarPagina));
+    </script>
 </body>
 </html>

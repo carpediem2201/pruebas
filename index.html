@@ -2,545 +2,216 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2d2d2d">
-    <meta name="description" content="Mi sitio web personal con tema Architect">
-    <title>Mi sitio Architect | Optimizado</title>
-    
-    <!-- Compatibilidad con navegadores antiguos -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Temas | GitHub Pages</title>
     <style>
-        /* ============================================
-           RESET Y NORMALIZACIÓN PARA TODOS LOS NAVEGADORES
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ============================================
-           VARIABLES CSS (para fácil personalización)
-           ============================================ */
-        :root {
-            --color-dark: #2d2d2d;
-            --color-accent: #ff6600;
-            --color-accent-hover: #e05500;
-            --color-light: #f4f4f4;
-            --color-text: #333;
-            --color-text-light: #ccc;
-            --color-white: #fff;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --container-width: 900px;
-            --transition-speed: 0.3s;
-        }
-
-        /* ============================================
-           ESTILOS BASE
-           ============================================ */
         body {
-            font-family: var(--font-main);
-            line-height: 1.6;
-            color: var(--color-text);
-            background: var(--color-white);
-            font-size: 16px; /* Base para rem */
-        }
-
-        /* Contenedor responsivo */
-        .container {
-            width: 90%;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* ============================================
-           TIPOGRAFÍA RESPONSIVA (clamp)
-           ============================================ */
-        h1 { 
-            font-size: clamp(1.8rem, 6vw, 2.8rem); 
-            margin: 0;
-            line-height: 1.2;
-        }
-        h2 { 
-            font-size: clamp(1.4rem, 5vw, 2rem); 
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-        h3 { 
-            font-size: clamp(1.2rem, 4vw, 1.5rem); 
-        }
-        p, li, .menu li a {
-            font-size: clamp(1rem, 4vw, 1.1rem);
-        }
-        header p {
-            font-size: clamp(0.9rem, 3.5vw, 1rem);
-        }
-
-        /* ============================================
-           CABECERA
-           ============================================ */
-        header {
-            background: var(--color-dark);
-            color: var(--color-white);
-            padding: 30px 0;
-            border-bottom: 4px solid var(--color-accent);
-        }
-        header h1 a {
-            color: var(--color-white);
-            text-decoration: none;
-        }
-        header p {
-            color: var(--color-text-light);
-            margin: 10px 0 0;
-        }
-
-        /* ============================================
-           MENÚ DE NAVEGACIÓN (responsive)
-           ============================================ */
-        nav {
-            background: #1a1a1a;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Botón hamburguesa */
-        .menu-toggle {
-            display: none;
-            background: var(--color-accent);
-            color: var(--color-white);
-            border: none;
-            padding: 14px 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-            transition: background var(--transition-speed);
-        }
-        .menu-toggle:hover {
-            background: var(--color-accent-hover);
-        }
-
-        /* Menú principal */
-        .menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-        }
-        .menu li {
-            margin: 0;
-        }
-        .menu li a {
-            display: block;
-            padding: 15px 25px;
-            color: var(--color-white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: background var(--transition-speed);
-            min-height: 48px;
-            letter-spacing: 0.3px;
-        }
-        .menu li a:hover,
-        .menu li a.activo {
-            background: var(--color-accent);
-        }
-
-        /* ============================================
-           MEDIA QUERY: MÓVILES (menos de 768px)
-           ============================================ */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-            }
-            .menu.open {
-                display: flex;
-            }
-            .menu li a {
-                padding: 12px 20px;
-                border-top: 1px solid rgba(255,255,255,0.1);
-            }
-        }
-
-        /* ============================================
-           SECCIÓN PRINCIPAL
-           ============================================ */
-        #main_content {
-            background: var(--color-white);
-            padding: 30px 0;
-            min-height: 50vh;
-        }
-
-        /* ============================================
-           BOTONES
-           ============================================ */
-        .btn {
-            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            background: var(--color-accent);
-            color: var(--color-white);
-            padding: 12px 28px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 1rem;
-            font-weight: 500;
-            min-height: 48px;
-            min-width: 120px;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-            transition: all var(--transition-speed);
-        }
-        .btn:hover {
-            background: var(--color-accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .btn:active {
-            transform: translateY(0);
+            padding: 20px;
         }
 
-        /* ============================================
-           PIE DE PÁGINA
-           ============================================ */
-        footer {
-            background: var(--color-light);
-            padding: 25px 0;
-            margin-top: 40px;
-            text-align: center;
-            color: #666;
-            font-size: clamp(0.8rem, 3vw, 0.9rem);
-            border-top: 1px solid #ddd;
-        }
-
-        /* ============================================
-           PÁGINAS (sistema de pestañas)
-           ============================================ */
-        .pagina {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-        .pagina.activa {
-            display: block;
+        .selector-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============================================
-           LISTAS Y ENLACES
-           ============================================ */
-        ul, ol {
-            padding-left: 1.5rem;
-            margin: 1rem 0;
-        }
-        li {
-            margin: 0.5rem 0;
-        }
-        a {
-            color: var(--color-accent);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-        a:hover {
-            color: var(--color-accent-hover);
-            text-decoration: underline;
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
         }
 
-        /* ============================================
-           IMÁGENES RESPONSIVAS
-           ============================================ */
-        img {
-            max-width: 100%;
-            height: auto;
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .selector-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
             display: block;
-            border-radius: 8px;
         }
 
-        /* ============================================
-           TABLAS RESPONSIVAS
-           ============================================ */
-        .table-responsive {
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-        table {
+        .temas-select {
             width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background: var(--color-light);
-        }
-
-        /* ============================================
-           FORMULARIOS (por si añades después)
-           ============================================ */
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            margin: 8px 0;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
             font-family: inherit;
         }
-        input:focus, textarea:focus, select:focus {
+
+        .temas-select:hover {
+            border-color: #667eea;
+        }
+
+        .temas-select:focus {
             outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 2px rgba(255,102,0,0.2);
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
         }
 
-        /* ============================================
-           UTILIDADES
-           ============================================ */
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .mt-2 { margin-top: 1rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .hidden { display: none; }
-
-        /* ============================================
-           SOPORTE PARA TABLETS
-           ============================================ */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                width: 85%;
-            }
-            .menu li a {
-                padding: 12px 20px;
-            }
+        .btn-ver {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        /* ============================================
-           SOPORTE PARA MÓVILES MUY PEQUEÑOS
-           ============================================ */
-        @media (max-width: 480px) {
-            .container {
-                width: 92%;
-                padding: 0 10px;
-            }
-            .btn {
-                width: 100%;
-                padding: 14px;
-            }
+        .btn-ver:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
         }
 
-        /* ============================================
-           MODO OSCURO (detecta preferencia del usuario)
-           ============================================ */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #1a1a1a;
-                color: #e0e0e0;
-            }
-            #main_content {
-                background: #1a1a1a;
-            }
-            footer {
-                background: #111;
-                color: #888;
-                border-top-color: #333;
-            }
-            .menu li a {
-                color: #e0e0e0;
-            }
-            input, textarea, select {
-                background: #2a2a2a;
-                border-color: #444;
-                color: #e0e0e0;
-            }
-            th {
-                background: #2a2a2a;
-            }
-            td, th {
-                border-color: #444;
-            }
+        .btn-ver:active {
+            transform: translateY(0);
+        }
+
+        .info-temas {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .info-temas h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .lista-temas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .lista-temas span {
+            padding: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.6rem; }
+            .header p { font-size: 0.95rem; }
+            .content { padding: 25px 20px; }
         }
     </style>
 </head>
 <body>
-
-    <!-- CABECERA -->
-    <header>
-        <div class="container">
-            <h1>Mi sitio web con Architect</h1>
-            <p>Tema optimizado para todos los dispositivos</p>
+    <div class="selector-container">
+        <div class="header">
+            <h1>🎨 Galería de Temas</h1>
+            <p>Selecciona un diseño para tu sitio web</p>
         </div>
-    </header>
 
-    <!-- MENÚ DE NAVEGACIÓN (responsivo) -->
-    <nav>
-        <div class="container">
-            <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰ Menú</button>
-            <ul class="menu" id="menu">
-                <li><a href="#" onclick="mostrarPagina('inicio'); return false" class="activo" id="link-inicio">🏠 Inicio</a></li>
-                <li><a href="#" onclick="mostrarPagina('sobre'); return false" id="link-sobre">👤 Sobre mí</a></li>
-                <li><a href="#" onclick="mostrarPagina('proyectos'); return false" id="link-proyectos">📁 Proyectos</a></li>
-                <li><a href="#" onclick="mostrarPagina('contacto'); return false" id="link-contacto">📧 Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
+        <div class="content">
+            <label class="selector-label">📱 Elige un tema:</label>
+            <select id="selectorTemas" class="temas-select">
+                <option value="">-- Selecciona un tema --</option>
+                <option value="tema-clasico.html">🏛️ Tema Clásico (Architect)</option>
+                <option value="tema-oscuro.html">🌙 Tema Oscuro Minimalista</option>
+                <option value="tema-claro.html">☀️ Tema Claro Elegante</option>
+                <option value="tema-tech.html">💻 Tema Tecnológico (Neon)</option>
+                <option value="tema-natural.html">🌿 Tema Natural (Verde)</option>
+                <option value="tema-card.html">🃏 Tema Tarjetas (Cards)</option>
+            </select>
 
-    <!-- ========== PÁGINA DE INICIO ========== -->
-    <div id="inicio" class="pagina activa">
-        <div class="container">
-            <section id="main_content">
-                <h2>Bienvenido a mi sitio</h2>
-                <p><strong>AQUÍ PON TU FRASE ORIGINAL</strong></p>
-                <p>Este es mi sitio web creado con GitHub Pages, utilizando el tema Architect totalmente optimizado.</p>
-                <p>La web se adapta automáticamente a tu dispositivo: PC, tablet o móvil.</p>
-                <button class="btn" onclick="alert('¡Gracias por visitar mi sitio!')">✨ Interactuar</button>
-            </section>
-        </div>
-    </div>
+            <button id="btnVerTema" class="btn-ver">🚀 Ver tema seleccionado</button>
 
-    <!-- ========== PÁGINA SOBRE MÍ ========== -->
-    <div id="sobre" class="pagina">
-        <div class="container">
-            <section id="main_content">
-                <h2>Sobre mí</h2>
-                <p>Hola, soy el creador de este sitio web. Me apasiona la tecnología y aprender cosas nuevas cada día.</p>
-                <h3>Mis intereses</h3>
-                <ul>
-                    <li>💻 Programación y desarrollo web</li>
-                    <li>🎨 Diseño responsivo y UX</li>
-                    <li>📱 Tecnología móvil</li>
-                    <li>🚀 Proyectos open source</li>
-                </ul>
-                <p>Este sitio está construido con HTML5, CSS3 y JavaScript puro, sin dependencias externas.</p>
-            </section>
-        </div>
-    </div>
-
-    <!-- ========== PÁGINA PROYECTOS ========== -->
-    <div id="proyectos" class="pagina">
-        <div class="container">
-            <section id="main_content">
-                <h2>Mis proyectos</h2>
-                <p>Estos son algunos de los proyectos en los que he trabajado:</p>
-                <ul>
-                    <li><strong>🌐 Proyecto 1:</strong> Mi primera web en GitHub Pages</li>
-                    <li><strong>📱 Proyecto 2:</strong> Sitio responsivo con menú adaptativo</li>
-                    <li><strong>🎨 Proyecto 3:</strong> Personalización del tema Architect</li>
-                    <li><strong>🚧 Proyecto 4:</strong> (Próximamente - tienda online)</li>
-                </ul>
-                <div class="table-responsive">
-                    <table>
-                        <tr><th>Proyecto</th><th>Estado</th><th>Año</th></tr>
-                        <tr><td>Sitio personal</td><td>✅ Activo</td><td>2025</td></tr>
-                        <tr><td>Blog técnico</td><td>🚧 En desarrollo</td><td>2025</td></tr>
-                    </table>
+            <div class="info-temas">
+                <h3>📁 Temas disponibles:</h3>
+                <div class="lista-temas">
+                    <span>🏛️ Clásico</span>
+                    <span>🌙 Oscuro</span>
+                    <span>☀️ Claro</span>
+                    <span>💻 Tech Neon</span>
+                    <span>🌿 Natural</span>
+                    <span>🃏 Cards</span>
                 </div>
-            </section>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #888;">
+                    💡 Cada tema es un archivo HTML independiente. Al seleccionar uno, serás redirigido a ese archivo.
+                </p>
+            </div>
         </div>
+
+        <footer>
+            <p>✨ Selecciona un tema y pruébalo | Todos los temas son responsivos</p>
+        </footer>
     </div>
 
-    <!-- ========== PÁGINA CONTACTO ========== -->
-    <div id="contacto" class="pagina">
-        <div class="container">
-            <section id="main_content">
-                <h2>Contacto</h2>
-                <p>Puedes contactarme a través de los siguientes medios:</p>
-                <ul>
-                    <li>📧 Email: <a href="mailto:miemail@ejemplo.com">miemail@ejemplo.com</a></li>
-                    <li>🐙 GitHub: <a href="#">github.com/tuusuario</a></li>
-                    <li>🐦 Twitter: <a href="#">@tusuario</a></li>
-                </ul>
-                <p>¡Gracias por visitar mi sitio! Responderé lo antes posible.</p>
-            </section>
-        </div>
-    </div>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-        <div class="container">
-            <p>© 2025 - Mi sitio web con Architect | Optimizado para todos los dispositivos</p>
-            <p style="font-size: 0.8rem; margin-top: 8px;">📱 Responsive | 🌓 Modo oscuro automático | ⚡ Rápido</p>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT (menú hamburguesa + navegación por pestañas) -->
     <script>
-        (function() {
-            // Menú hamburguesa para dispositivos táctiles
-            var toggleBtn = document.getElementById('menuToggle');
-            var menu = document.getElementById('menu');
-            
-            if (toggleBtn && menu) {
-                toggleBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    menu.classList.toggle('open');
-                });
-                
-                // Cerrar menú al hacer clic en un enlace (mejor experiencia móvil)
-                var menuLinks = menu.querySelectorAll('a');
-                for (var i = 0; i < menuLinks.length; i++) {
-                    menuLinks[i].addEventListener('click', function() {
-                        if (window.innerWidth <= 768) {
-                            menu.classList.remove('open');
-                        }
-                    });
-                }
+        const select = document.getElementById('selectorTemas');
+        const btn = document.getElementById('btnVerTema');
+
+        btn.addEventListener('click', function() {
+            const temaSeleccionado = select.value;
+            if (temaSeleccionado) {
+                window.location.href = temaSeleccionado;
+            } else {
+                alert('⚠️ Por favor, selecciona un tema de la lista.');
             }
-            
-            // Función para cambiar entre páginas
-            window.mostrarPagina = function(paginaId) {
-                // Ocultar todas las páginas
-                var paginas = document.querySelectorAll('.pagina');
-                for (var i = 0; i < paginas.length; i++) {
-                    paginas[i].classList.remove('activa');
-                }
-                
-                // Mostrar la página seleccionada
-                var paginaActiva = document.getElementById(paginaId);
-                if (paginaActiva) {
-                    paginaActiva.classList.add('activa');
-                }
-                
-                // Actualizar clase activa en el menú
-                var links = document.querySelectorAll('.menu li a');
-                for (var i = 0; i < links.length; i++) {
-                    links[i].classList.remove('activo');
-                }
-                
-                var linkActivo = document.getElementById('link-' + paginaId);
-                if (linkActivo) {
-                    linkActivo.classList.add('activo');
-                }
-                
-                // Scroll suave al inicio de la página (mejor UX en móviles)
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-        })();
-    </script>
-    
-    <!-- Soporte para navegadores muy antiguos (opcional) -->
-    <script>
-        // Detectar si el navegador soporta CSS Grid/Flexbox (muestra mensaje amigable)
-        if (typeof window.CSS !== 'undefined' && !window.CSS.supports('display', 'flex')) {
-            document.body.innerHTML = '<div style="text-align:center;padding:50px;"><h1>⚠️ Navegador desactualizado</h1><p>Tu navegador no es compatible con las tecnologías modernas. Por favor, actualízalo.</p></div>';
-        }
+        });
+
+        // Al presionar Enter en el select
+        select.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                btn.click();
+            }
+        });
     </script>
 </body>
 </html>

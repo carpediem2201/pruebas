@@ -19,14 +19,20 @@
             color:#7f8c8d;
             text-decoration:none;
             cursor:pointer;
-            transition:color 0.3s;
+            transition:all 0.3s;
+            border-radius:8px;
+            margin:5px;
         }
+        /* Hover para TODOS los enlaces (incluye activo, pero será sobreescrito) */
         .menu li a:hover{
-            color:#e74c3c;  /* Rojo vibrante */
-            background:#f0f0f0;  /* Fondo gris muy claro */
+            color:#e74c3c;
+            background:#f0f0f0;
         }
-        .menu li a.activo{
+        /* El enlace activo NO hace hover (permanece igual) */
+        .menu li a.activo:hover{
+            background:transparent;
             color:#7f8c8d;
+            cursor:default;
         }
         .card{background:#fff;padding:25px;border-radius:12px;margin:20px 0;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
         footer{background:#fff;padding:20px 0;text-align:center;margin-top:40px;color:#7f8c8d;border-top:1px solid #ecf0f1}
@@ -34,7 +40,7 @@
         .btn:hover{background:#2980b9}
         .pagina{display:none}
         .pagina.activa{display:block}
-        @media(max-width:768px){.menu{flex-direction:column}}
+        @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}}
     </style>
 </head>
 <body>
@@ -49,7 +55,8 @@
         <div class="container">
             <div class="card">
                 <h2>Diseño Claro</h2>
-                <p>Fondo blanco, sombras suaves y detalles en azul. Ideal para sitios profesionales.</p>
+                <p>Fondo blanco, sombras suaves y detalles en rojo. Ideal para sitios profesionales.</p>
+                <p><strong>Comportamiento del menú:</strong> La opción activa (donde estás) no tiene hover. Las otras opciones se resaltan al pasar el ratón.</p>
                 <a href="index.html" class="btn">← Volver al selector</a>
             </div>
         </div>
@@ -75,23 +82,30 @@
         </div>
     </div>
 
-    <footer><div class="container"><p>© 2025 - Tema Claro | <a href="index.html" style="color:#3498db">Volver al selector</a></p></div></footer>
+    <footer><div class="container"><p>© 2025 - Tema Claro | <a href="index.html" style="color:#e74c3c">Volver al selector</a></p></div></footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const enlaces = document.querySelectorAll('.menu li a');
+            
             function cambiarPagina(event) {
                 event.preventDefault();
                 const paginaId = this.getAttribute('data-pagina');
+                const paginaActiva = document.getElementById(paginaId);
+                
+                // Cambiar página activa
                 document.querySelectorAll('.pagina').forEach(function(pagina) {
                     pagina.classList.remove('activa');
                 });
-                document.getElementById(paginaId).classList.add('activa');
+                paginaActiva.classList.add('activa');
+                
+                // Cambiar clase activo en el menú
                 enlaces.forEach(function(enlace) {
                     enlace.classList.remove('activo');
                 });
                 this.classList.add('activo');
             }
+            
             for (let i = 0; i < enlaces.length; i++) {
                 enlaces[i].addEventListener('click', cambiarPagina);
             }

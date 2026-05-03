@@ -2,92 +2,284 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tema Clásico | Architect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Tema Clásico | Architect con Menú Hamburguesa</title>
     <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#333}
-    .container{max-width:900px;margin:0 auto;padding:20px}
-    header{background:#2d2d2d;color:#fff;padding:30px 0;border-bottom:4px solid #ff6600}
-    header h1{font-size:2.5rem}
-    header p{color:#ccc}
-    nav{background:#1a1a1a;padding:0}
-    .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-    .menu li a{
-        display:block;
-        padding:15px 25px;
-        color:#fff;
-        text-decoration:none;
-        cursor:pointer;
-        transition:background 0.3s;
-    }
-    /* Solo cambia de color cuando el ratón está encima (hover) */
-    .menu li a:hover{
-        background:#ff6600;
-    }
-    /* Eliminamos la clase activo (ya no tendrá color) */
-    .menu li a.activo{
-        background:transparent;  /* Sin color de fondo */
-    }
-    footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
-    .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
-    .btn:hover{background:#e05500}
-    .pagina{display:none}
-    .pagina.activa{display:block}
-    @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}}
-</style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;color:#333;overflow-x:hidden}
+        .container{max-width:900px;margin:0 auto;padding:20px}
+        
+        /* ========== CABECERA CON BOTÓN HAMBURGUESA ========== */
+        header{
+            background:#2d2d2d;
+            color:#fff;
+            padding:15px 0;
+            border-bottom:4px solid #ff6600;
+            position:relative;
+        }
+        .header-container{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            max-width:900px;
+            margin:0 auto;
+            padding:0 20px;
+        }
+        .header-container h1{
+            font-size:1.5rem;
+            margin:0;
+        }
+        .header-container p{
+            display:none;
+        }
+        
+        /* Botón hamburguesa */
+        .hamburger-btn{
+            background:#ff6600;
+            border:none;
+            color:#fff;
+            font-size:1.8rem;
+            cursor:pointer;
+            padding:10px 15px;
+            border-radius:8px;
+            transition:background 0.3s;
+            z-index:1001;
+            position:relative;
+        }
+        .hamburger-btn:hover{
+            background:#e05500;
+        }
+        
+        /* Menú lateral (off-canvas) */
+        .sidebar-menu{
+            position:fixed;
+            top:0;
+            left:-280px;
+            width:280px;
+            height:100%;
+            background:#1a1a1a;
+            color:#fff;
+            transition:left 0.3s ease;
+            z-index:1000;
+            box-shadow:2px 0 10px rgba(0,0,0,0.3);
+            overflow-y:auto;
+        }
+        .sidebar-menu.open{
+            left:0;
+        }
+        
+        /* Cabecera del menú lateral */
+        .sidebar-header{
+            padding:20px;
+            border-bottom:1px solid #333;
+            background:#2d2d2d;
+        }
+        .sidebar-header h3{
+            margin:0;
+            color:#ff6600;
+        }
+        .sidebar-header p{
+            font-size:0.8rem;
+            color:#ccc;
+            margin-top:5px;
+        }
+        
+        /* Opciones del menú lateral */
+        .sidebar-links{
+            list-style:none;
+            padding:0;
+            margin:0;
+        }
+        .sidebar-links li{
+            border-bottom:1px solid #333;
+        }
+        .sidebar-links li a{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:15px 20px;
+            color:#ccc;
+            text-decoration:none;
+            transition:all 0.3s;
+            font-size:1rem;
+        }
+        .sidebar-links li a:hover{
+            background:#ff6600;
+            color:#fff;
+            padding-left:25px;
+        }
+        
+        /* Overlay (fondo oscuro al abrir menú) */
+        .overlay{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.5);
+            opacity:0;
+            visibility:hidden;
+            transition:all 0.3s;
+            z-index:999;
+        }
+        .overlay.active{
+            opacity:1;
+            visibility:visible;
+        }
+        
+        /* Menú superior original */
+        nav{background:#1a1a1a;padding:0}
+        .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
+        .menu li a{
+            display:block;
+            padding:15px 25px;
+            color:#fff;
+            text-decoration:none;
+            cursor:pointer;
+            transition:background 0.3s;
+        }
+        .menu li a:hover{
+            background:#ff6600;
+        }
+        .menu li a.activo{
+            background:transparent;
+        }
+        
+        footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
+        .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
+        .btn:hover{background:#e05500}
+        .pagina{display:none}
+        .pagina.activa{display:block}
+        
+        @media(max-width:768px){
+            .menu{flex-direction:column}
+            .menu li a{text-align:center}
+            .header-container h1{font-size:1.2rem}
+        }
+    </style>
 </head>
 <body>
-    <header><div class="container"><h1>Tema Clásico</h1><p>Inspirado en Architect</p></div></header>
-    <nav><div class="container"><ul class="menu"><li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li><li><a data-pagina="sobre">📖 Sobre</a></li><li><a data-pagina="contacto">📧 Contacto</a></li></ul></div></nav>
-    
-    <div id="inicio" class="pagina activa"><div class="container"><h2>Bienvenido</h2><p>Este es el tema clásico tipo Architect. Diseño elegante y profesional.</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
-    <div id="sobre" class="pagina"><div class="container"><h2>Sobre mí</h2><p>Información sobre el autor de este sitio. Apasionado por el diseño web y la tecnología.</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
-    <div id="contacto" class="pagina"><div class="container"><h2>Contacto</h2><p>Puedes contactarme a través de email: ejemplo@midominio.com</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
-    
-    <footer><div class="container"><p>© 2025 - Tema Clásico | <a href="index.html">Volver al selector</a></p></div></footer>
+
+    <!-- CABECERA CON BOTÓN HAMBURGUESA -->
+    <header>
+        <div class="header-container">
+            <button class="hamburger-btn" id="hamburgerBtn">☰</button>
+            <h1>Tema Clásico</h1>
+            <div style="width:50px;"></div> <!-- Espaciador -->
+        </div>
+    </header>
+
+    <!-- MENÚ LATERAL (HAMBURGUESA) -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h3>📁 Navegación</h3>
+            <p>Explora las secciones</p>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html">🏠 Inicio (Selector)</a></li>
+            <li><a href="tema-clasico.html">🎨 Tema Clásico</a></li>
+            <li><a href="tema-oscuro.html">🌙 Tema Oscuro</a></li>
+            <li><a href="tema-claro.html">☀️ Tema Claro</a></li>
+            <li><a href="tema-tech.html">💻 Tema Tech</a></li>
+            <li><a href="tema-natural.html">🌿 Tema Natural</a></li>
+            <li><a href="tema-card.html">🃏 Tema Cards</a></li>
+        </ul>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MENÚ SUPERIOR ORIGINAL -->
+    <nav>
+        <div class="container">
+            <ul class="menu">
+                <li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li>
+                <li><a data-pagina="sobre">📖 Sobre</a></li>
+                <li><a data-pagina="contacto">📧 Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="inicio" class="pagina activa">
+        <div class="container">
+            <h2>Bienvenido</h2>
+            <p>Este es el tema clásico tipo Architect. Diseño elegante y profesional.</p>
+            <p><strong>📱 Prueba el botón ☰ en la esquina superior izquierda.</strong> Se desplegará un menú lateral con enlaces a todos los temas.</p>
+            <a href="index.html" class="btn">← Volver al selector</a>
+        </div>
+    </div>
+
+    <div id="sobre" class="pagina">
+        <div class="container">
+            <h2>Sobre mí</h2>
+            <p>Información sobre el autor de este sitio. Apasionado por el diseño web y la tecnología.</p>
+            <a href="index.html" class="btn">← Volver al selector</a>
+        </div>
+    </div>
+
+    <div id="contacto" class="pagina">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>Puedes contactarme a través de email: ejemplo@midominio.com</p>
+            <a href="index.html" class="btn">← Volver al selector</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 - Tema Clásico | <a href="index.html">Volver al selector</a></p>
+        </div>
+    </footer>
 
     <script>
-    // Función que se ejecuta cuando la página termina de cargar
-    document.addEventListener('DOMContentLoaded', function() {
+        // ========== MENÚ HAMBURGUESA ==========
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const overlay = document.getElementById('overlay');
         
-        // Seleccionar todos los enlaces del menú
-        const enlaces = document.querySelectorAll('.menu li a');
+        function openMenu() {
+            sidebarMenu.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
         
-        // Función para cambiar de página
-        function cambiarPagina(event) {
-            // Evitar que el enlace recargue la página
-            event.preventDefault();
+        function closeMenu() {
+            sidebarMenu.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        hamburgerBtn.addEventListener('click', openMenu);
+        overlay.addEventListener('click', closeMenu);
+        
+        // Cerrar menú al hacer clic en un enlace
+        const sidebarLinks = document.querySelectorAll('.sidebar-links li a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        
+        // ========== MENÚ SUPERIOR (Inicio, Sobre, Contacto) ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            const enlaces = document.querySelectorAll('.menu li a');
             
-            // Obtener el ID de la página a mostrar
-            const paginaId = this.getAttribute('data-pagina');
-            
-            // Ocultar todas las páginas
-            const todasLasPaginas = document.querySelectorAll('.pagina');
-            todasLasPaginas.forEach(function(pagina) {
-                pagina.classList.remove('activa');
-            });
-            
-            // Mostrar la página seleccionada
-            const paginaAMostrar = document.getElementById(paginaId);
-            if (paginaAMostrar) {
-                paginaAMostrar.classList.add('activa');
+            function cambiarPagina(event) {
+                event.preventDefault();
+                const paginaId = this.getAttribute('data-pagina');
+                document.querySelectorAll('.pagina').forEach(function(pagina) {
+                    pagina.classList.remove('activa');
+                });
+                document.getElementById(paginaId).classList.add('activa');
+                enlaces.forEach(function(enlace) {
+                    enlace.classList.remove('activo');
+                });
+                this.classList.add('activo');
             }
             
-            // Quitar la clase 'activo' de TODOS los enlaces del menú
-            enlaces.forEach(function(enlace) {
-                enlace.classList.remove('activo');
-            });
-            
-            // Añadir la clase 'activo' SOLO al enlace que se clickeó
-            this.classList.add('activo');
-        }
-        
-        // Asignar el evento click a cada enlace del menú
-        for (let i = 0; i < enlaces.length; i++) {
-            enlaces[i].addEventListener('click', cambiarPagina);
-        }
-    });
-</script>
+            for (let i = 0; i < enlaces.length; i++) {
+                enlaces[i].addEventListener('click', cambiarPagina);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -13,18 +13,55 @@
         header p{color:#ccc}
         nav{background:#1a1a1a;padding:0}
         .menu{list-style:none;display:flex;justify-content:center;flex-wrap:wrap}
-        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none}
+        .menu li a{display:block;padding:15px 25px;color:#fff;text-decoration:none;cursor:pointer}
         .menu li a:hover,.menu li a.activo{background:#ff6600}
         footer{background:#f4f4f4;padding:20px 0;text-align:center;margin-top:40px}
         .btn{display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:5px;text-decoration:none}
         .btn:hover{background:#e05500}
+        .pagina{display:none}
+        .pagina.activa{display:block}
         @media(max-width:768px){.menu{flex-direction:column}.menu li a{text-align:center}}
     </style>
 </head>
 <body>
     <header><div class="container"><h1>Tema Clásico</h1><p>Inspirado en Architect</p></div></header>
-    <nav><div class="container"><ul class="menu"><li><a href="#" class="activo">Inicio</a></li><li><a href="#">Sobre</a></li><li><a href="#">Contacto</a></li></ul></div></nav>
-    <div class="container"><h2>Bienvenido</h2><p>Este es el tema clásico tipo Architect. Diseño elegante y profesional.</p><a href="index.html" class="btn">← Volver al selector</a></div>
-    <footer><div class="container"><p>© 2025 - Tema Clásico | <a href="index.html">Volver</a></p></div></footer>
+    <nav><div class="container"><ul class="menu"><li><a data-pagina="inicio" class="activo">🏠 Inicio</a></li><li><a data-pagina="sobre">📖 Sobre</a></li><li><a data-pagina="contacto">📧 Contacto</a></li></ul></div></nav>
+    
+    <div id="inicio" class="pagina activa"><div class="container"><h2>Bienvenido</h2><p>Este es el tema clásico tipo Architect. Diseño elegante y profesional.</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
+    <div id="sobre" class="pagina"><div class="container"><h2>Sobre mí</h2><p>Información sobre el autor de este sitio. Apasionado por el diseño web y la tecnología.</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
+    <div id="contacto" class="pagina"><div class="container"><h2>Contacto</h2><p>Puedes contactarme a través de email: ejemplo@midominio.com</p><a href="index.html" class="btn">← Volver al selector</a></div></div>
+    
+    <footer><div class="container"><p>© 2025 - Tema Clásico | <a href="index.html">Volver al selector</a></p></div></footer>
+
+    <script>
+        // Seleccionar todos los enlaces del menú
+        const enlaces = document.querySelectorAll('.menu li a');
+        
+        // Función para cambiar de página
+        function cambiarPagina(event) {
+            const paginaId = event.currentTarget.getAttribute('data-pagina');
+            
+            // Ocultar todas las páginas
+            document.querySelectorAll('.pagina').forEach(pagina => {
+                pagina.classList.remove('activa');
+            });
+            
+            // Mostrar la página seleccionada
+            document.getElementById(paginaId).classList.add('activa');
+            
+            // Quitar clase activo de todos los enlaces
+            enlaces.forEach(enlace => {
+                enlace.classList.remove('activo');
+            });
+            
+            // Añadir clase activo al enlace pulsado
+            event.currentTarget.classList.add('activo');
+        }
+        
+        // Añadir evento click a cada enlace
+        enlaces.forEach(enlace => {
+            enlace.addEventListener('click', cambiarPagina);
+        });
+    </script>
 </body>
 </html>
